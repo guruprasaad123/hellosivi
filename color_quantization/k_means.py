@@ -19,8 +19,10 @@ print("Labels => {}".format(np.unique(kmeans.labels_)))
 def plot_colors(hist,centroids):
     bar = np.zeros((50,300,3),dtype=np.uint8)
     start_x = 0
-    remove_list = list([[255,255,255],[0,0,0],[128,128,128]])
+    remove_list = np.array([[255,255,255],[0,0,0],[128,128,128]])
+    centroids = centroids.astype(np.uint8)
     centroids = [x for x in centroids if x not in remove_list]
+
     for (percent,color) in zip(hist,centroids):
         end_x = start_x + (percent * 300)
         cv2.rectangle(bar,
@@ -50,4 +52,3 @@ plt.figure()
 plt.axis("off")
 plt.imshow(bar)
 plt.show()
-
